@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Affiliate;
+use App\Form\AffiliateType;
+use App\Form\LoginFormType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+class AffiliateController extends AbstractController
+{
+    private $httpClient;
+
+    public function __construct(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
+
+    /**
+     * @Route("/affiliate/register", name="affiliate_register")
+     */
+    public function index(Request $request): Response
+    {
+        $affiliate = new Affiliate();
+        $form = $this->createForm(AffiliateType::class, $affiliate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $existingAffiliateByName = $entityManager->getRepository(Affiliate::class)->findOneBy(['name' => $affiliate->getName()]);
+            if ($existingAffiliateByName) {
+                $this->addFlash('error', 'An account with this name already exists.');
+                return $this->redirectToRoute('affiliate_register');
+            }
+
+            $existingAffiliate = $entityManager->getRepository(Affiliate::class)->findOneBy(['email' => $affiliate->getEmail()]);
+            if ($existingAffiliate) {
+                $this->addFlash('error', 'An account with this email already exists.');
+                return $this->redirectToRoute('affiliate_register');
+            }
+
+            // Validate email using ZeroBounce API
+            $isValid = $this->validateEmail($affiliate->getEmail());
+            if (!$isValid) {
+                $this->addFlash('error', 'Invalid email address.');
+                return $this->redirectToRoute('affiliate_register');
+            }
+
+            $entityManager->persist($affiliate);
+            $entityManager->flush();
+
+            // Redirect to a success page
+            return $this->redirectToRoute('registration_success');
+        }
+
+        return $this->render('affiliate/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    private function validateEmail(string $email): bool
+    {
+        $apiKey = 'ad338fb8c2d142fa807fbd3490b104f1';
+        $url = sprintf('https://api.zerobounce.net/v2/validate?api_key=%s&email=%s', $apiKey, $email);
+
+        $response = $this->httpClient->request('GET', $url);
+        $content = $response->toArray();
+
+        return $content['status'] === 'valid';
+    }
+
+    /**
+     * @Route("/affiliate/success", name="registration_success")
+     */
+    public function registrationSuccess(): Response
+    {
+        return $this->render('affiliate/success.html.twig');
+    }
+
+    /**
+     * @Route("/affiliate/login", name="affiliate_login")
+     */
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
+    {
+        $form = $this->createForm(LoginFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Handle login logic
+            // For example, authenticate the user
+
+            // Redirect to the success page
+            return $this->redirectToRoute('registration_success');
+        }
+
+        return $this->render('affiliate/login.html.twig', [
+            'form' => $form->createView(),
+            'error' => $authenticationUtils->getLastAuthenticationError(),
+            'last_username' => $authenticationUtils->getLastUsername(),
+        ]);
+    }
+}

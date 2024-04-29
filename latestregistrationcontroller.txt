@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Affiliate;
+use App\Entity\User;
+use App\Form\RegistrationFormType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+class RegistrationController extends AbstractController
+{
+    /**
+     * @Route("/", name="app_homepage")
+     */
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $user->getPassword() // Use getPassword() directly
+                )
+            );
+
+            // Save the user to the database
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Create an affiliate entity for the user
+            $affiliate = new Affiliate();
+            $affiliate->setUser($user);
+            $affiliate->setName('name'); // Placeholder name
+
+            // Save the affiliate to the database
+            $entityManager->persist($affiliate);
+            $entityManager->flush();
+
+            // Store the user ID in the session or pass it along as a parameter
+            $this->get('session')->set('user_id', $user->getId());
+
+            // Redirect to the login page or any other page
+            return $this->redirectToRoute('link_success');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/login", name="app_login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // Get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // Last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        // Check if the user has the ROLE_ADMIN role
+        if ($this->isGranted('ROLE_ADMIN')) {
+            // Redirect to the admin success template
+            return $this->redirectToRoute('admin_success');
+        }
+
+        return $this->render('registration/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/success", name="admin_success")
+     */
+    public function adminSuccess(): Response
+    {
+        return $this->render('registration/admin_success.html.twig');
+    }
+
+
+}

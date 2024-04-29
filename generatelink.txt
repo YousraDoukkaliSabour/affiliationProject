@@ -1,0 +1,25 @@
+ /**
+     * @Route("/affiliate/generate-link/{affiliateId}", name="affiliate_generate_link", requirements={"affiliateId"="\d+"})
+     */
+    public function generateLink($affiliateId, Request $request): Response
+    {
+        // Your logic to generate the unique link here
+        $uniqueToken = bin2hex(random_bytes(16)); // Generate a unique token
+        $link = $this->generateUrl('affiliate_sales', ['token' => $uniqueToken], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        // Save the link to the database or display it to the affiliate
+        // For demonstration purposes, we'll assume the link is saved in the database
+
+        // Increment the click count for the link
+        $clickCount = $this->incrementClickCount($affiliateId);
+
+        // Redirect to the generated link
+        return new RedirectResponse($link);
+    }
+
+    private function incrementClickCount($affiliateId): int
+    {
+        // Your logic to increment the click count in the database
+        // For demonstration purposes, we'll just return a dummy click count
+        return 1;
+    }

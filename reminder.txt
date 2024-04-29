@@ -1,0 +1,2 @@
+affiliate view to only show current user sales
+commission page to dynamically set commissions in admin page

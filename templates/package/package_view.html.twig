@@ -1,0 +1,393 @@
+{% extends 'base.html.twig' %}
+{% block title %}Package View{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5">Package View</h1>
+        <!-- Button to toggle between monthly and yearly options -->
+        <button id="toggleYearly">Show Yearly Options</button>
+        <div class="pricing-table">
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Basic Monthly</div>
+                    <div class="card-body">
+                        <h2>$2.50</h2>
+                        <p>per month</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package1', {{ affiliateLinkId }})">Choose</button>
+
+                        <!-- PayPal button -->
+                        <div  id="paypal-button-container-P-4YD4904608159321CMYF6VYY"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Pro Monthly</div>
+                    <div class="card-body">
+                        <h2>$4.50</h2>
+                        <p>per month</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package2', {{ affiliateLinkId }})">Choose</button>
+
+                        <div id="paypal-button-container-P-5FX16221LP270780KMYHJDEI"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Premium Monthly</div>
+                    <div class="card-body">
+                        <h2>$9.99</h2>
+                        <p>per month</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package3', {{ affiliateLinkId }})">Choose</button>
+                        <div id="paypal-button-container-P-0WL0791224883614BMYHJGAI"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Advanced Monthly</div>
+                    <div class="card-body">
+                        <h2>$14.99</h2>
+                        <p>per month</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package4', {{ affiliateLinkId }})">Choose</button>
+                        <div id="paypal-button-container-P-3MH68862EL524240FMYHJHGY"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column ">
+                <div class="card">
+                    <div class="card-header">Basic Yearly</div>
+                    <div class="card-body">
+                        <h2>$30</h2>
+                        <p>per year</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package5', {{ affiliateLinkId }})">Choose</button>
+                        <div id="paypal-button-container-P-3J462847RL175054LMYHJJNA"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Pro Yearly</div>
+                    <div class="card-body">
+                        <h2>$54</h2>
+                        <p>per year</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package6', {{ affiliateLinkId }})">Choose</button>
+                        <div id="paypal-button-container-P-22G32154RF564713DMYHJQHY"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Premium Yearly</div>
+                    <div class="card-body">
+                        <h2>$120</h2>
+                        <p>per year</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package7', {{ affiliateLinkId }})">Choose</button>
+                        <div id="paypal-button-container-P-1VJ383726E3071324MYHJRKI"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-column">
+                <div class="card">
+                    <div class="card-header">Advanced Yearly</div>
+                    <div class="card-body">
+                        <h2>$180</h2>
+                        <p>per year</p>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="redirectToPackage('package8', {{ affiliateLinkId }})">Choose</button>
+                        <div id="paypal-button-container-P-82A689128A0286114MYHJSXY"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="paypal-button-container-P-3V527007SN766012NMYH4PUQ"></div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AVcpMqLiVJIYo1RT5-3WfYlwRMG3Ln33OwfENaSANKQa9qPI18CC5CsSLWD2Hktpdwhj7VIwhR3mr7UV&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-4YD4904608159321CMYF6VYY'
+                });
+            },
+            onApprove: function(data, actions) {
+                alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            }
+        }).render('#paypal-button-container-P-4YD4904608159321CMYF6VYY'); // Renders the PayPal button
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-5FX16221LP270780KMYHJDEI'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package2', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-5FX16221LP270780KMYHJDEI'); // Renders the PayPal button
+
+
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-0WL0791224883614BMYHJGAI'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package3', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-0WL0791224883614BMYHJGAI'); // Renders the PayPal button
+
+
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-3MH68862EL524240FMYHJHGY'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package4', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-3MH68862EL524240FMYHJHGY'); // Renders the PayPal button
+
+
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-3J462847RL175054LMYHJJNA'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package5', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-3J462847RL175054LMYHJJNA'); // Renders the PayPal button
+
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-22G32154RF564713DMYHJQHY'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package6', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-22G32154RF564713DMYHJQHY'); // Renders the PayPal button
+
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-1VJ383726E3071324MYHJRKI'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package7', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-1VJ383726E3071324MYHJRKI'); // Renders the PayPal button
+
+
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-82A689128A0286114MYHJSXY'
+                });
+            },
+            onApprove: function(data, actions) {
+                // Redirect to redirectToPackage function
+                redirectToPackage('package8', {{ affiliateLinkId|default(0) }}); // Assuming affiliateLinkId is available in this scope
+            }
+        }).render('#paypal-button-container-P-82A689128A0286114MYHJSXY'); // Renders the PayPal button
+
+
+
+
+
+
+
+
+
+
+
+        function redirectToPackage(packageName, affiliateLinkId) {
+            // Construct the URL with the affiliate link ID as a query parameter
+            let url = `/package/${packageName}?affiliateLinkId=${affiliateLinkId}`;
+            window.location.href = url;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleYearlyButton = document.getElementById('toggleYearly');
+            const yearlyColumns = document.querySelectorAll('.yearly');
+
+            toggleYearlyButton.addEventListener('click', function() {
+                yearlyColumns.forEach(function(column) {
+                    column.classList.toggle('hidden');
+                });
+
+                // Change button text based on visibility
+                if (toggleYearlyButton.innerText === 'Show Yearly Options') {
+                    toggleYearlyButton.innerText = 'Hide Yearly Options';
+                } else {
+                    toggleYearlyButton.innerText = 'Show Yearly Options';
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+{% endblock %}

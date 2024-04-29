@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Package;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class PackageController extends AbstractController
+{
+    /**
+     * @Route("/packages/generate", name="package_generate")
+     */
+    public function generate(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $package = new Package();
+        $packageLinks = [];
+
+        for ($i = 1; $i <= 8; $i++) {
+            $token = bin2hex(random_bytes(16));
+            $link = $this->generateUrl('package_click', ['token' => $token]);
+            $packageLinks[] = ['id' => $i, 'price' => $i * 50, 'token' => $token, 'link' => $link];
+        }
+
+        $package->setPackageLinks($packageLinks);
+        $entityManager->persist($package);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('package_display', ['id' => $package->getId()]);
+    }
+
+    /**
+     * @Route("/package/{id}", name="package_display")
+     */
+    public function display(Package $package): Response
+    {
+        return $this->render('affiliate/click_tracking.html.twig', ['package' => $package]);
+    }
+
+    /**
+     * @Route("/package/click/{token}", name="package_click")
+     */
+    public function click(string $token): Response
+    {
+        // Track the click using the token
+        // Redirect to the affiliate click tracking
+        return $this->redirectToRoute('affiliate_click_tracking', ['token' => $token]);
+    }
+
+    /**
+     * @Route("/package/click/tracking", name="package_click_tracking")
+     */
+    public function clickTracking(Request $request): Response
+    {
+        $token = $request->query->get('token'); // Get the clicked package token from the request
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // Find the package link by token
+        $packageLink = $entityManager->getRepository(Package::class)->findOneBy(['token' => $token]);
+
+        if (!$packageLink) {
+            throw $this->createNotFoundException('Invalid package link.');
+        }
+
+        // Increment the click count and save to the database
+        $packageLink->setClicks($packageLink->getClicks() + 1);
+        $entityManager->flush();
+
+        // Set a cookie to remember the clicked package for further tracking
+        $response = new Response();
+        $response->headers->setCookie(new Cookie('clicked_package_token', $token));
+
+        return $this->render('affiliate/click_tracking.html.twig', ['package' => $packageLink]);
+    }
+}

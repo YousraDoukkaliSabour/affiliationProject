@@ -1,0 +1,22 @@
+{# templates/affiliate/dashboard.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Affiliate Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Affiliate Dashboard</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary">Generate Affiliate Link</button>
+    {{ form_end(form) }}
+
+    {% if affiliateLink %}
+        <div class="mt-3">
+            <strong>Generated Affiliate Link:</strong>
+            <p>{{ affiliateLink }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

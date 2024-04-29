@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Affiliate Dashboard!{% endblock %}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+        <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+        <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+        <!--begin::Fonts(mandatory for all pages)-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+        <link rel="stylesheet" href="{{ asset('assets/css/moncss.css') }}" />
+        <!--end::Fonts-->
+        <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+        <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <!--end::Global Stylesheets Bundle-->
+        <script >// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+    {% endblock %}
+
+
+</head>
+{% block body %}
+
+
+
+
+
+    {% block javascripts %}
+        <!--begin::Javascript-->
+        <script>
+            var hostUrl = "{{ asset('') }}";
+        </script>
+
+        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+        <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}" ></script>
+        <script src="{{ asset('assets/js/scripts.bundle.js') }}" ></script>
+        <!--end::Global Javascript Bundle-->
+        <!--begin::Vendors Javascript(used for this page only)-->
+        <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/index.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/xy.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/percent.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/radar.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/map.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js" ></script>
+        <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js" ></script>
+        <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}" ></script>
+        <!--end::Vendors Javascript-->
+        <!--begin::Custom Javascript(used for this page only)-->
+        <script src="{{ asset('assets/js/widgets.bundle.js') }}" ></script>
+        <script src="{{ asset('assets/js/custom/widgets.js') }}" ></script>
+        <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}" ></script>
+        <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}" ></script>
+        <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}" ></script>
+        <script src="{{ asset('assets/js/custom/utilities/modals/new-target.js') }}" ></script>
+        <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}" ></script>
+
+        <script>
+            // <![CDATA[  <-- For SVG support
+            if ('WebSocket' in window) {
+                (function () {
+                    function refreshCSS() {
+                        var sheets = [].slice.call(document.getElementsByTagName("link"));
+                        var head = document.getElementsByTagName("head")[0];
+                        for (var i = 0; i < sheets.length; ++i) {
+                            var elem = sheets[i];
+                            var parent = elem.parentElement || head;
+                            parent.removeChild(elem);
+                            var rel = elem.rel;
+                            if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                                elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                            }
+                            parent.appendChild(elem);
+                        }
+                    }
+                    var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                    var address = protocol + window.location.host + window.location.pathname + '/ws';
+                    var socket = new WebSocket(address);
+                    socket.onmessage = function (msg) {
+                        if (msg.data == 'reload') window.location.reload();
+                        else if (msg.data == 'refreshcss') refreshCSS();
+                    };
+                    if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                        console.log('Live reload enabled.');
+                        sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                    }
+                })();
+            }
+            else {
+                console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+            }
+            // ]]>
+        </script>
+
+        <!--end::Custom Javascript-->
+        <!--end::Javascript-->
+    {% endblock %}
+{% endblock %}
+</html>

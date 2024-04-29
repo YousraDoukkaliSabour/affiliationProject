@@ -1,0 +1,16 @@
+{% extends '/base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Register as an Affiliate</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+https://api.zerobounce.net/v2/validate?api_key=ad338fb8c2d142fa807fbd3490b104f1&email=valid@example.com&ip_address=156.124.12.145

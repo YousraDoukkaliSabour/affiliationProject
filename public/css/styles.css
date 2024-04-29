@@ -1,0 +1,251 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800,300i,400i,500i,600i,700i,800i&display=swap');
+
+/* Global Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333;
+    direction: ltr;
+    margin: 0;
+    background-color: #fff;
+}
+
+/* Container for the form */
+.content {
+    background-color: #fff;
+    border-radius: 7px;
+    width: 400px; /* Set a fixed width */
+    margin: 40px auto; /* Centered horizontally and vertically */
+    padding: 30px; /* Increased padding */
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc; /* Added border */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added box shadow */
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px; /* Spacing from the heading */
+}
+
+label {
+    font-weight: 400;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.42857;
+    color: #555;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4e97b8; /* Blue ciel */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #4188a0; /* Darker blue on hover */
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px; /* Spacing from the form */
+    color: #4188a0; /* Same color as the hover state of the button */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Logo Styles */
+.logo {
+    max-width: 150px; /* Adjust the size as needed */
+    height: auto;
+}
+
+
+/* Logout Button Styles */
+.logout-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 5px 15px; /* Adjust padding as needed */
+    background-color: transparent;
+    color: #f00; /* Text color */
+    border: 2px solid #f00; /* Border color */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Add a smooth transition effect */
+    font-weight: bold; /* Use a bold font weight */
+}
+
+.logout-btn:hover {
+    background-color: #f00; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+/* Add this to your existing CSS */
+
+.form-wrapper {
+    max-height: 400px; /* Set a maximum height for the form */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 20px; /* Add some space for the scrollbar */
+}
+
+.logout-btn {
+    padding: 5px 10px !important; /* Adjust padding to make the button smaller */
+    font-size: 14px !important; /* Adjust font size */
+    width: auto !important; /* Let the button size adjust based on content */
+    height: auto !important; /* Let the button size adjust based on content */
+}
+
+/* Pricing Table Styles */
+.pricing-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-gap: 20px; /* Spacing between columns and rows */
+}
+
+.pricing-column {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    margin-bottom: 10px;
+}
+
+.card-body h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.card-footer {
+    text-align: center;
+}
+
+.card-footer button {
+    padding: 10px 20px;
+    background-color: #4e97b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card-footer button:hover {
+    background-color: #4188a0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333;
+    direction: ltr;
+    margin: 0;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+}
+
+.table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #4e97b8;
+}
+
+.btn-primary:hover {
+    background-color: #4188a0;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.btn-success:hover {
+    background-color: #4cae4c;
+}
+
+

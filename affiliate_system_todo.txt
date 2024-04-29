@@ -1,0 +1,12 @@
+-so only one link to track ✔️
+the link will be accessed by visiters who will be shown a package view, ✔️
+
+-the admin will have a table with a visiter column with his affiliatelink colum, the plan the visiter chose, the commission he takes, and the percentage for fulsite, ✔️ //not sure, gonna have to test
+
+-the admin will also have an add new button that will show a form with name, email, password, percentage of commission for each plan, so the tracking will be for what plans a uniqueid cookies chooses,✔️
+
+- there will also be a view for affiliate where affiliate can get his commission which will send the admin a notification, the admin will then set commissions of this affiliate to 0 and send him his money; affiliate_link will have commissions fields meaning the admin will set commissions for each plans for an affiliate
+
+
+zzzsz1AA9991zzdfvgz23dsa@gmail.com
+'zzzsz1AA9991zzdfvgz23dsa@gmail.com'

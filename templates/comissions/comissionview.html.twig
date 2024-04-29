@@ -1,0 +1,31 @@
+{# templates/commissionview.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Commission View{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h1 class="mt-5 mb-4">Commission View</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Affiliate Link ID</th>
+                        <th>Commission Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for commission in commissions %}
+                        <tr>
+                            <td>{{ commission.affiliateLinkId }}</td>
+                            <td>{{ commission.amount }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

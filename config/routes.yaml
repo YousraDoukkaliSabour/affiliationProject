@@ -1,0 +1,112 @@
+# config/routes.yaml
+app_register:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+
+app_homepage:
+  path: /
+  controller: App\Controller\RegistrationController::register
+
+link_success:
+  path: /link-success
+  controller: App\Controller\LinkSuccessController::index
+  methods: ['GET']
+
+affiliate_dashboard:
+  path: /dashboard
+  controller: App\Controller\DashboardController::dashboard
+  methods: ['GET', 'POST']
+
+package_view:
+  path: /package-view
+  controller: App\Controller\YourController::packageView
+
+app_package:
+  path: /affiliate/Product-{productId}
+  controller: App\Controller\DashboardController::package
+  requirements:
+    productId: '\d+'  # Restrict the productId to be a digit
+  methods: ['GET']
+
+track_sales:
+  path: /track-sales
+  controller: App\Controller\SalesController::trackSales
+
+affiliate_view:
+  path: /affiliate/view
+  controller: App\Controller\AffiliateViewController::affiliateView
+  methods: ['GET']
+
+request_commission:
+  path: /affiliate/request-commission
+  controller: App\Controller\AffiliateViewController::requestCommission
+  methods: ['POST']
+
+admin_success:
+  path: /admin-success
+  controller: App\Controller\RegistrationController::adminSuccess
+
+app_logout:
+  path: /logout
+  methods: [POST]
+
+admin_commissions:
+  path: /admin/commissions
+  controller: App\Controller\CommissionController::calculateCommissions
+  methods: ['GET']
+
+admin_register_affiliate:
+  path: /admin/register/affiliate
+  controller: App\Controller\AdminController::registerAffiliate
+
+app_package_view:
+  path: '/affiliate/affiliatelink={affiliateLinkId}'
+  controller: 'App\Controller\AdminController::packageView'
+
+
+
+package_view_1:
+  path: /package/package1
+  controller: App\Controller\PackageViewController::package1
+
+package_view_2:
+  path: /package/package2
+  controller: App\Controller\PackageViewController::package2
+
+package_view_3:
+  path: /package/package3
+  controller: App\Controller\PackageViewController::package3
+
+package_view_4:
+  path: /package/package4
+  controller: App\Controller\PackageViewController::package4
+
+package_view_5:
+  path: /package/package5
+  controller: App\Controller\PackageViewController::package5
+
+package_view_6:
+  path: /package/package6
+  controller: App\Controller\PackageViewController::package6
+
+package_view_7:
+  path: /package/package7
+  controller: App\Controller\PackageViewController::package7
+
+package_view_8:
+  path: /package/package8
+  controller: App\Controller\PackageViewController::package8
+
+
+commission_requests:
+  path: /admin/commission-requests
+  controller: App\Controller\AdminController::commissionRequests
+  methods: ['GET']
+
+
+
+show_affiliate_info:
+  path: '/affiliate/{affiliateId}'
+  controller: 'App\Controller\UserController::showAffiliateInfo'
+
+

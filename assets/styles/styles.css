@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #f56a6a; /* Orange color */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f56a6a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #e64949; /* Slightly darker orange on hover */
+}

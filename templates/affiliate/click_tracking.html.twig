@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Click Tracking{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5">Click Tracking</h1>
+        <p>Click tracked successfully!</p>
+        <a href="{{ path('link_success') }}" class="btn btn-primary">Go to Package View</a>
+    </div>
+{% endblock %}

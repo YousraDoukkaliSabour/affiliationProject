@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Controller;
+
+
+
+
+use App\Entity\AffiliateLink;
+use App\Entity\Sales;
+use App\Form\AffiliateLinkType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
+
+class DashboardController extends AbstractController
+{
+
+
+
+
+    /**
+     * @Route("/dashboard", name="app_dashboard")
+     */
+    public function dashboard(Request $request, Security $security): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $affiliateLink = new AffiliateLink();
+        $form = $this->createForm(AffiliateLinkType::class, $affiliateLink);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiliateLink->setLink($this->generateAffiliateLink($affiliateLink));
+            $entityManager->persist($affiliateLink);
+            $entityManager->flush();
+            $affiliateLink->setLink($this->generateAffiliateLink($affiliateLink));
+
+            // Get the product ID from the submitted form
+            $productId = $affiliateLink->getProduct()->getId();
+
+            // Redirect to the generated affiliate link
+            return $this->redirect($affiliateLink->getLink());
+        }
+
+        return $this->render('affiliate/dashboard.html.twig', [
+            'form' => $form->createView(),
+            'affiliateLink' => $affiliateLink->getLink(),
+        ]);
+    }
+
+    private function generateAffiliateLink(AffiliateLink $affiliateLink): string
+    {
+        $productId = $affiliateLink->getProduct()->getId();
+        $affiliateLinkId = $affiliateLink->getId();
+
+        // Set cookie to track the affiliate link
+        setcookie('affiliateLinkId', $affiliateLinkId, time() + 3600, '/');
+
+        // Generate the full URL including the path to the package template
+        return 'http://localhost:8000/affiliate/Product-' . $productId . '?affiliatelink=' . $affiliateLinkId;
+    }
+
+    /**
+     * @Route("/affiliate/Product-{productId}", name="app_package")
+     */
+    public function package(Request $request, int $productId): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // Get the affiliate link ID from the query parameters
+        $affiliateLinkId = $request->query->get('affiliatelink');
+
+        // Use a persistent cookie to track the user
+        $cookieName = 'affiliateUserId';
+        $cookieValue = $request->cookies->get($cookieName);
+        if (!$cookieValue) {
+            $cookieValue = uniqid('user_', true); // Generate a unique identifier for the user
+            $response = new Response();
+            $response->headers->setCookie(new Cookie($cookieName, $cookieValue, time() + (3600 * 24 * 30))); // Set cookie to expire in 30 days
+            $response->send();
+        }
+
+        // Check if there is an existing sale for the unique identifier and affiliate link
+        $existingSale = $entityManager->getRepository(Sales::class)->findOneBy([
+            'affiliateLinkId' => $affiliateLinkId,
+            'uniqueIdentifier' => $cookieValue,
+        ]);
+
+        if (!$existingSale) {
+            // Increment sales count for the affiliate link
+            $affiliateLink = $entityManager->getRepository(AffiliateLink::class)->find($affiliateLinkId);
+            if ($affiliateLink) {
+                $affiliateLink->setSalesCount($affiliateLink->getSalesCount() + 1);
+                $entityManager->persist($affiliateLink);
+                $entityManager->flush();
+
+                // Create a new Sales entity with additional information
+                $sales = new Sales();
+                $sales->setAffiliateLinkId($affiliateLinkId);
+                $sales->setAmount($affiliateLink->getProduct()->getPrice());
+                $sales->setCreatedAt(new \DateTime());
+                $sales->setUniqueIdentifier($cookieValue); // Store the unique identifier
+                $entityManager->persist($sales);
+                $entityManager->flush();
+            }
+        }
+
+        // Assuming you have a template for each package like "package1.html.twig", "package2.html.twig", etc.
+        $templateName = 'package' . $productId . '.html.twig';
+
+        return $this->render('package/' . $templateName, [
+            'productId' => $productId,
+        ]);
+    }
+
+
+}

@@ -1,0 +1,1 @@
+make it so when youre in click_tracking template, theres 8 buttons, one for each type of package_link, each button generates a link to a package type that can be tracked by click property in package entity

@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\SalesRepository")
+ */
+class Sales
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\AffiliateLink")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $affiliateLink;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $package;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $amount;
+
+    // Add more properties as needed
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAffiliateLink(): ?Affiliate
+    {
+        return $this->affiliate;
+    }
+
+    public function setAffiliateLink(?Affiliate $affiliate): self
+    {
+        $this->affiliate = $affiliate;
+
+        return $this;
+    }
+
+    public function getPackage(): ?string
+    {
+        return $this->package;
+    }
+
+    public function setPackage(string $package): self
+    {
+        $this->package = $package;
+
+        return $this;
+    }
+
+    public function getAmount(): ?float
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(float $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    // Add getter and setter methods for other properties
+
+}
+
+ 

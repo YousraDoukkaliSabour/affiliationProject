@@ -1,0 +1,159 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Affiliate;
+use App\Entity\AffiliateLink;
+use App\Form\AffiliateRegistrationType;
+use App\Form\AffiliateType;
+use App\Form\LoginFormType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+class AffiliateController extends AbstractController
+{
+    /**
+     * @Route("/", name="affiliate_register")
+     */
+    public function index(Request $request): Response
+    {
+        $affiliate = new Affiliate();
+        $form = $this->createForm(AffiliateType::class, $affiliate); // Use the imported form type class
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($affiliate);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('registration_success');
+        }
+
+        return $this->render('affiliate/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
+    /**
+     * @Route("/affiliate/login", name="affiliate_login")
+     */
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
+    {
+        // If user is already logged in, redirect to success page
+        if ($this->getUser()) {
+            return $this->redirectToRoute('registration_success');
+        }
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        $form = $this->createForm(LoginFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // The form was submitted and is valid, handle login logic here
+            // For example, use Symfony's security component to authenticate the affiliate
+
+            return $this->redirectToRoute('registration_success');
+        }
+
+        return $this->render('affiliate/login.html.twig', [
+            'form' => $form->createView(),
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
+    }
+
+    /**
+     * @Route("/affiliate/link/generate", name="generate_affiliate_link", methods={"POST"})
+
+     */
+    public function generateAffiliateLink(): Response
+    {
+        $affiliate = $this->getUser();
+
+        if (!$affiliate instanceof Affiliate) {
+            throw new AccessDeniedException('User is not an affiliate.');
+        }
+
+        $affiliateLink = new AffiliateLink();
+        $token = bin2hex(random_bytes(16));
+        $affiliateLink->setToken($token);
+        $affiliate->addAffiliateLink($affiliateLink);
+
+        // Generate the link (e.g., a route with a token parameter)
+        $link = $this->generateUrl('affiliate_click', ['token' => $token]);
+        dump($link); // Debugging output
+        $affiliateLink->setLink($link);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($affiliateLink);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('link_success', ['token' => $token]);
+    }
+
+
+    /**
+     * @Route("/affiliate/success", name="registration_success")
+     */
+    public function success(): Response
+    {
+
+        $token = bin2hex(random_bytes(16)); // Generate a random token
+
+        // Generate the link (e.g., a route with a token parameter)
+        $link = $this->generateUrl('affiliate_click', ['token' => $token]);
+
+        // Store the token and link in the database
+        $affiliateLink = new AffiliateLink();
+        $affiliateLink->setToken($token);
+        $affiliateLink->setLink($link);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($affiliateLink);
+        $entityManager->flush();
+
+        return $this->render('affiliate/link_success.html.twig', [
+            'token' => $token,
+            'link' => $link,
+        ]);
+    }
+
+
+
+
+    /**
+     * @Route("/affiliate/link/click/{token}", name="affiliate_click")
+     */
+    public function clickAffiliateLink($token): Response
+    {
+        $affiliateLink = $this->getDoctrine()->getRepository(AffiliateLink::class)->findOneBy(['token' => $token]);
+
+        if (!$affiliateLink) {
+            throw $this->createNotFoundException('Invalid affiliate link.');
+        }
+
+        $affiliateLink->setClicks($affiliateLink->getClicks() + 1);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($affiliateLink);
+        $entityManager->flush();
+
+        return $this->redirect($affiliateLink->getLink());
+    }
+
+
+}
+
+
+
+
+ 

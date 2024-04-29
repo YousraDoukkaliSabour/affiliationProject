@@ -1,0 +1,12 @@
+# id	token	clicks	link	sales	affiliate_id	id	name	email	password
+1	3e9eb5e8eec6b16def10fc2904919c03	0	/affiliate/link/click/3e9eb5e8eec6b16def10fc2904919c03	0	0				
+2	498c17a5a96d1fe72dc570a51ad7fe64	0	/affiliate/link/click/498c17a5a96d1fe72dc570a51ad7fe64	0	0				
+3	4f8f372ae34ca6637bfde1c09672994b	0	/affiliate/link/click/4f8f372ae34ca6637bfde1c09672994b	0	0				
+4	2c336effae30cb92cdbf692b2da15caf	0	/affiliate/link/click/2c336effae30cb92cdbf692b2da15caf?link_id=2c336effae30cb92cdbf692b2da15caf	0	0				
+5	cbc4d92610a25913adc80f93e33a1a50	0	/affiliate/link/click/cbc4d92610a25913adc80f93e33a1a50?link_id=cbc4d92610a25913adc80f93e33a1a50	0	0				
+6	013f53a4c947b880f3eac00600247a14	0	/affiliate/link/click/013f53a4c947b880f3eac00600247a14?link_id=013f53a4c947b880f3eac00600247a14	0	0				
+7	a07472ae7aef10fea267443b95893336	0	/affiliate/link/click/a07472ae7aef10fea267443b95893336?link_id=a07472ae7aef10fea267443b95893336	0	0				
+8	a5e2bd2f26ac2b32d967ebb5f8b7b52e	0	/affiliate/link/click/a5e2bd2f26ac2b32d967ebb5f8b7b52e?link_id=a5e2bd2f26ac2b32d967ebb5f8b7b52e	0	0				
+9	66c0733ba7d8d2614e2614c7fae60193	0	/affiliate/link/click/66c0733ba7d8d2614e2614c7fae60193?link_id=66c0733ba7d8d2614e2614c7fae60193	0	0				
+10	d2c9f51d0a8ce8153181a0edc239e06c	0	/affiliate/link/click/d2c9f51d0a8ce8153181a0edc239e06c?link_id=d2c9f51d0a8ce8153181a0edc239e06c	0	0				
+11	6ac60691a4016bda720fcd0fb8551c05	0	/affiliate/link/click/6ac60691a4016bda720fcd0fb8551c05?link_id=6ac60691a4016bda720fcd0fb8551c05	0	0				

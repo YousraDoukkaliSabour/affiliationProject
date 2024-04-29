@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affiliate View{% endblock %}
+
+{% block body %}
+    <h1>Affiliate View</h1>
+
+    <p>My Commissions:</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Commission ID</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commission in commissions %}
+            <tr>
+                <td>{{ commission.id }}</td>
+                <td>{{ commission.amount }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Total Commissions: {{ totalCommissions }}</p>
+
+    <form action="{{ path('request_commission') }}" method="post">
+        <input type="hidden" name="affiliateLinkId" value="{{ affiliateLinkId }}">
+        <button type="submit">Get My Commission</button>
+    </form>
+{% endblock %}

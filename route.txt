@@ -1,0 +1,27 @@
+# config/routes.yaml
+
+# config/routes.yaml
+
+affiliate_register:
+   path: /
+   controller: App\Controller\AffiliateController::index
+
+registration_success:
+   path: /affiliate/success
+   controller: App\Controller\AffiliateController::success
+
+affiliate_login:
+   path: /affiliate/login
+   controller: App\Controller\AffiliateController::login
+   # config/routes.yaml
+
+   generate_affiliate_link:
+      path: /affiliate/link/generate
+      controller: App\Controller\AffiliateController::generateAffiliateLink
+      methods: [ 'POST' ]
+
+   affiliate_link_success:
+      path: /affiliate/link/success/{token}
+      controller: App\Controller\AffiliateController::linkSuccess
+
+ 

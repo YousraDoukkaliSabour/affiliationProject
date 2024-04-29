@@ -1,0 +1,29 @@
+security:
+    enable_authenticator_manager: true
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                success_handler: App\Security\CustomAuthenticationSuccessHandler
+
+            logout:
+                path: app_logout
+
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+    encoders:
+        App\Entity\User:
+            algorithm: auto
